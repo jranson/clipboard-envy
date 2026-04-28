@@ -1,4 +1,4 @@
-# <img src="assets/app-icon-transparent.png" alt="Clipboard Envy" height="48" /> Clipboard Envy [<img align="right" src="assets/download-app-store.svg" />](https://apps.apple.com/us/app/clipboard-envy/id6759918875)
+# <img src="assets/app-icon-transparent.png" alt="Clipboard Envy" height="48" /> Clipboard Envy™ [<img align="right" src="assets/download-app-store.svg" />](https://apps.apple.com/us/app/clipboard-envy/id6759918875)
 
 A lightweight, developer-focused macOS Menu Bar-only app for managing and transforming Clipboard data.
 
@@ -74,6 +74,6 @@ While we welcome Pull Requests and other contributions from other humans (includ
 
 ## Trademark Notice
 
-Clipboard Envy and its logo are trademarks of Centennial OSS, Inc.
+Clipboard Envy and its logo are trademarks of Centennial OSS Inc.
 Use of the name and branding is not permitted for modified versions or forks without permission.
 See TRADEMARKS.md for details.

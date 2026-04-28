@@ -218,7 +218,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${SRCROOT}/ClipboardEnvy/BuildInfo.generated.swift",
+				"${SRCROOT}/ClipboardEnvy/AppData/BuildInfo.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

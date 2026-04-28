@@ -6,7 +6,7 @@ excluded:
   - build
   - dist
   - .build
-  - ClipboardEnvy/BuildInfo.generated.swift
+  - ClipboardEnvy/AppData/BuildInfo.generated.swift
 
 disabled_rules:
   # Short names are common in tight loops, parsers, and indices.
