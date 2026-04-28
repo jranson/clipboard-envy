@@ -361,15 +361,38 @@ enum ClipboardAnalyzer {
            let payloadData = base64URLDecodeToData(payloadPart),
            let payloadJSON = try? JSONSerialization.jsonObject(with: payloadData) as? [String: Any] {
             var lines: [String] = []
-            let sortedClaims = payloadJSON.sorted(by: { $0.key < $1.key })
-            for (key, value) in sortedClaims {
+            // Priority order: email, name, exp, sub, iat, iss, cognito:username
+            let priorityKeys = ["email", "name", "exp", "sub", "iat", "iss", "cognito:username"]
+            let allKeys = payloadJSON.keys.sorted()
+
+            var orderedKeys: [String] = []
+            var processedKeys = Set<String>()
+
+            // Priority keys first
+            for pk in priorityKeys {
+                if payloadJSON[pk] != nil {
+                    orderedKeys.append(pk)
+                    processedKeys.insert(pk)
+                }
+            }
+
+            // Remaining keys alphabetically
+            for k in allKeys {
+                if !processedKeys.contains(k) {
+                    orderedKeys.append(k)
+                }
+            }
+
+            for key in orderedKeys {
                 guard lines.count < previewMaxLines else { break }
-                let valueStr = jwtPayloadClaimDisplayString(key: key, value: value)
-                let line = "\(key): \(valueStr)"
-                lines.append(truncateForMenuLabel(line, limit: maxLineLen))
+                if let value = payloadJSON[key] {
+                    let valueStr = jwtPayloadClaimDisplayString(key: key, value: value)
+                    let line = "\(key): \(valueStr)"
+                    lines.append(truncateForMenuLabel(line, limit: maxLineLen))
+                }
             }
             analysis.appendPreviewOnlyLines(lines)
-            analysis.setPreviewHasAdditionalLines(sortedClaims.count > lines.count)
+            analysis.setPreviewHasAdditionalLines(payloadJSON.count > lines.count)
         }
 
         return analysis
