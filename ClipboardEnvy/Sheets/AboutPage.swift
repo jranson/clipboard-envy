@@ -126,14 +126,16 @@ struct AboutClipboardEnvyView: View {
             Label("Build info (copy for support)", systemImage: "doc.text")
                 .font(.system(size: 14))
                 .foregroundStyle(.secondary)
+            ZStack(alignment: .bottomTrailing) {
+                HStack(alignment: .top, spacing: 12) {
+                    Text(BuildInfo.copyableBlob)
+                        .font(.system(size: 14, design: .monospaced))
+                        .textSelection(.enabled)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, minHeight: 84, alignment: .leading)
+                    Spacer()
+                }
 
-            HStack(alignment: .top, spacing: 12) {
-                Text(BuildInfo.copyableBlob)
-                    .font(.system(size: 14, design: .monospaced))
-                    .textSelection(.enabled)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, minHeight: 84, alignment: .leading)
-                Spacer()
                 Button(didCopyBuildInfo ? "✓ Copied" : "Copy to Clipboard") {
                     NSPasteboard.general.clearContents()
                     NSPasteboard.general.setString(BuildInfo.copyableBlob, forType: .string)
@@ -143,7 +145,8 @@ struct AboutClipboardEnvyView: View {
                 .buttonStyle(.bordered)
                 .buttonBorderShape(.capsule)
                 .controlSize(.large)
-                .padding(.top, 10)
+                .padding(.trailing, 0)
+                .padding(.bottom, 8)
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 0)
