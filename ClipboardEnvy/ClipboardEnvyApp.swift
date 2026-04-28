@@ -12,6 +12,13 @@ struct ClipboardEnvyApp: App {
     @StateObject private var customTransformStore = CustomTransformStore()
     @StateObject private var snippetsStore: SnippetsStore
 
+    init() {
+        AppIdentifier.logBundleIdentifier()
+        _snippetsStore = StateObject(wrappedValue: SnippetsStore(container: Self.sharedModelContainer))
+        Self.registerArgon2Defaults()
+        MenuOpenBridge.install()
+    }
+
     private static let sharedModelContainer: ModelContainer = {
         let schema = Schema([Snippet.self])
         let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -21,12 +28,6 @@ struct ClipboardEnvyApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-
-    init() {
-        _snippetsStore = StateObject(wrappedValue: SnippetsStore(container: Self.sharedModelContainer))
-        Self.registerArgon2Defaults()
-        MenuOpenBridge.install()
-    }
 
     /// Register default Argon2id parameters. Override via:
     ///   defaults write org.centennialoss.snipstash Argon2MemoryKiB 65535
