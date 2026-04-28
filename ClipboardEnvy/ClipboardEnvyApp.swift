@@ -54,7 +54,7 @@ struct ClipboardEnvyApp: App {
         })
         .modelContainer(Self.sharedModelContainer)
 
-        Window("Snippet Editor", id: "editor") {
+        Window("Snippet Editor", id: "editor-\(AppIdentifier.nameSlug)") {
             EditorWindowRoot()
                 .environmentObject(editorStore)
                 .environmentObject(snippetsStore)
@@ -62,13 +62,13 @@ struct ClipboardEnvyApp: App {
         .modelContainer(Self.sharedModelContainer)
         .defaultSize(width: 560, height: 420)
 
-        Window("About \(BuildInfo.appName)", id: "about-clipboard-envy") {
+        Window("About \(AppIdentifier.name)", id: "about-\(AppIdentifier.nameSlug)") {
             AboutClipboardEnvyView()
         }
         .defaultSize(width: 520, height: 540)
         .windowResizability(.contentSize)
 
-        Window("\(BuildInfo.appName) Settings", id: "settings-clipboard-envy") {
+        Window("\(AppIdentifier.name) Settings", id: "settings-\(AppIdentifier.nameSlug)") {
             SettingsClipboardEnvyView()
         }
         .defaultSize(width: 780, height: 548)

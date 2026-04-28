@@ -329,7 +329,7 @@ private struct DiscreteVolumeSlider: NSViewRepresentable {
 // MARK: - Main Settings View
 
 struct SettingsClipboardEnvyView: View {
-    private static let windowTitle = "\(BuildInfo.appName) Settings"
+    private static let windowTitle = "\(AppIdentifier.name) Settings"
     @Environment(\.colorScheme) private var colorScheme
     @State private var selectedSection: SettingsSection? = .general
     @State private var escapeMonitor: Any?
@@ -355,7 +355,7 @@ struct SettingsClipboardEnvyView: View {
                             .resizable()
                             .frame(width: 46, height: 46)
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(BuildInfo.appName)
+                            Text(AppIdentifier.name)
                                 .font(.system(size: 15))
                                 .foregroundStyle(.secondary)
                             Text("Settings")
@@ -511,7 +511,7 @@ private struct GeneralSettingsView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         HStack(spacing: 12) {
                             VStack(alignment: .leading, spacing: 6) {
-                                Text("Launch \(BuildInfo.appName) on Startup")
+                                Text("Launch \(AppIdentifier.name) on Startup")
                                     .font(.system(size: 14))
                                 Text("Opens automatically when you sign in to this Mac. You can also change this in System Settings → General → Login Items.")
                                     .font(.system(size: 12))
@@ -528,7 +528,7 @@ private struct GeneralSettingsView: View {
 
                         if openAtLoginNeedsApproval {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("Enable \(BuildInfo.appName) in Login Items to finish.")
+                                Text("Enable \(AppIdentifier.name) in Login Items to finish.")
                                     .font(.system(size: 12))
                                     .foregroundStyle(.secondary)
                                 Button("Open Login Items…") {

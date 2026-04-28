@@ -452,10 +452,10 @@ struct MenuBarView: View {
 
     var body: some View {
         Button {
-            openWindow(id: "about-clipboard-envy")
+            openWindow(id: "about-\(AppIdentifier.nameSlug)")
             DispatchQueue.main.async {
                 NSApp.activate(ignoringOtherApps: true)
-                if let w = NSApp.windows.first(where: { $0.identifier?.rawValue == "about-clipboard-envy" }) {
+                if let w = NSApp.windows.first(where: { $0.identifier?.rawValue == "about-\(AppIdentifier.nameSlug)" }) {
                     if w.isMiniaturized {
                         w.deminiaturize(nil)
                     }
@@ -463,14 +463,14 @@ struct MenuBarView: View {
                 }
             }
         } label: {
-            Label("About \(BuildInfo.appName)", systemImage: "info.circle")
+            Label("About \(AppIdentifier.name)", systemImage: "info.circle")
         }
         Divider()
         Button {
-            openWindow(id: "settings-clipboard-envy")
+            openWindow(id: "settings-\(AppIdentifier.nameSlug)")
             DispatchQueue.main.async {
                 NSApp.activate(ignoringOtherApps: true)
-                if let w = NSApp.windows.first(where: { $0.identifier?.rawValue == "settings-clipboard-envy" }) {
+                if let w = NSApp.windows.first(where: { $0.identifier?.rawValue == "settings-\(AppIdentifier.nameSlug)" }) {
                     if w.isMiniaturized {
                         w.deminiaturize(nil)
                     }
@@ -1544,7 +1544,7 @@ struct MenuBarView: View {
             editorStore.pendingNewSnippetPrefill = ""
             editorStore.editingSnippet = nil
             editorStore.newSnippetEditorSession &+= 1
-            openWindow(id: "editor")
+            openWindow(id: "editor-\(AppIdentifier.nameSlug)")
             DispatchQueue.main.async {
                 NSApp.activate(ignoringOtherApps: true)
             }
@@ -1579,7 +1579,7 @@ struct MenuBarView: View {
         Button {
             NSApp.terminate(nil)
         } label: {
-            Label("Quit \(BuildInfo.appName)", systemImage: "xmark.circle")
+            Label("Quit \(AppIdentifier.name)", systemImage: "xmark.circle")
         }
         .onAppear {
             snippetsStore.refresh()
@@ -1617,7 +1617,7 @@ struct MenuBarView: View {
         editorStore.pendingNewSnippetPrefill = ClipboardIO.readString() ?? ""
         editorStore.editingSnippet = nil
         editorStore.newSnippetEditorSession &+= 1
-        openWindow(id: "editor")
+        openWindow(id: "editor-\(AppIdentifier.nameSlug)")
         DispatchQueue.main.async {
             NSApp.activate(ignoringOtherApps: true)
         }
@@ -1977,7 +1977,7 @@ struct MenuBarView: View {
             }
             Button("Edit") {
                 editorStore.editingSnippet = snippet
-                openWindow(id: "editor")
+                openWindow(id: "editor-\(AppIdentifier.nameSlug)")
                 DispatchQueue.main.async {
                     NSApp.activate(ignoringOtherApps: true)
                 }
