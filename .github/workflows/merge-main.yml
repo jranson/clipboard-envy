@@ -38,4 +38,3 @@ jobs:
       - name: Run clean, test, and build-release-unsigned
         run: |
           make clean test build-release-unsigned
-

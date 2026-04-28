@@ -369,18 +369,14 @@ enum ClipboardAnalyzer {
             var processedKeys = Set<String>()
 
             // Priority keys first
-            for pk in priorityKeys {
-                if payloadJSON[pk] != nil {
-                    orderedKeys.append(pk)
-                    processedKeys.insert(pk)
-                }
+            for pk in priorityKeys where payloadJSON[pk] != nil {
+                orderedKeys.append(pk)
+                processedKeys.insert(pk)
             }
 
             // Remaining keys alphabetically
-            for k in allKeys {
-                if !processedKeys.contains(k) {
-                    orderedKeys.append(k)
-                }
+            for k in allKeys where !processedKeys.contains(k) {
+                orderedKeys.append(k)
             }
 
             for key in orderedKeys {

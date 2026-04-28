@@ -24,6 +24,13 @@ jobs:
         with:
           xcode-version: 'latest-stable'
 
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: Run clean, test
+        run: |
+          make clean test
+
       - name: Validate required secrets are present
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}

@@ -38,4 +38,3 @@ jobs:
       - name: Run clean, test, and build
         run: |
           make clean test build
-
